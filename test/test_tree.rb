@@ -1082,6 +1082,23 @@ module TestTree
       assert_equal(k[1].name, root_node[1].name, "Child 2 should be returned")
     end
 
+    # Test TreeNode creation from hash
+    def test_from_hash
+      hash = {:root => {:child1 => "Child 1", :child2 => "Child 2", :child3 => {:child4 => "Child 4"}}}
+      root_node = Tree::TreeNode.from_hash(hash)
+
+      assert_equal(root_node.name, :root, "Root name should equal root hash key")
+      assert(root_node.content.nil?, "Root content should be nil")
+      assert_equal(root_node[:child1].name, :child1, "Child 1 should be returned")
+      assert_equal(root_node[:child1].content, "Child 1", "Child 1 content should be returned")
+      assert_equal(root_node[:child2].name, :child2, "Child 2 should be returned")
+      assert_equal(root_node[:child2].content, "Child 2", "Child 2 content should be returned")
+      assert_equal(root_node[:child3].name, :child3, "Child 3 should be returned")
+      assert(root_node[:child3].content.nil?, "Child 3 content should be nil")
+      assert_equal(root_node[:child3][:child4].name, :child4, "Child 4 should be returned")
+      assert_equal(root_node[:child3][:child4].content, "Child 4", "Child 4 content should be returned")
+    end
+
     # Test the old CamelCase method names
     def test_old_camelCase_method_names
       setup_test_tree

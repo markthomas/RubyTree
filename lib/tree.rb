@@ -43,6 +43,7 @@ require 'tree/tree_deps'
 require 'tree/version'
 require 'tree/utils/camel_case_method_handler'
 require 'tree/utils/json_converter'
+require 'tree/utils/hash_converter'
 
 # This module provides a TreeNode class which is the primary class for representing
 # nodes in the tree.
@@ -52,7 +53,7 @@ module Tree
 
   # == TreeNode Class Description
   #
-  # This class models the nodes for an *N-ary* tree data structue. The
+  # This class models the nodes for an *N-ary* tree data structure. The
   # nodes are *named* and have a place-holder for the node data (i.e.,
   # _content_ of the node). The node names are required to be *unique*
   # within the tree (as the name is implicitly used as an _ID_ within
@@ -134,6 +135,7 @@ module Tree
     include Enumerable
     include Tree::Utils::CamelCaseMethodHandler
     include Tree::Utils::JSONConverter
+    include Tree::Utils::HashConverter
 
     # @!attribute [r] name
     #
