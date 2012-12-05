@@ -53,12 +53,7 @@ module Tree::Utils::HashConverter
   # @see ClassMethods#from_hash
   def from_hash(hash)
     hash.each do |key,value|
-      new_node = ::Tree::TreeNode.new(key)
-      if value.is_a?(Hash)
-        new_node = new_node.from_hash(value)
-      else
-        new_node.content = value
-      end
+      new_node = value.is_a?(Hash) ? Tree::TreeNode.new(key).from_hash(value) : Tree::TreeNode.new(key,value)
       self << new_node
     end
 
